@@ -133,7 +133,7 @@ equalSign.addEventListener("click", () => {
 });
 
 clearBtn.addEventListener("click", () => {
-    if (prevNumber) {
+    if (calculatorScreen.value > 0) {
         clearNumber();
     } else {
         clearAll();
