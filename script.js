@@ -60,6 +60,11 @@ const calculate = () => {
     calculationOperator = "";
 };
 
+const clearNumber = () => {
+    currentNumber = "0";
+    calculatorScreen.value = "0";
+};
+
 const clearAll = () => {
     prevNumber = "";
     calculationOperator = "";
@@ -85,6 +90,10 @@ numbers.forEach((number) => {
         } else {
             inputNumber(event.target.value);
             updateScreen(event.target.value);
+        }
+
+        if (currentNumber >= 0) {
+            clearBtn.innerHTML = "C";
         }
     });
 });
@@ -124,7 +133,12 @@ equalSign.addEventListener("click", () => {
 });
 
 clearBtn.addEventListener("click", () => {
-    clearAll();
+    if (prevNumber) {
+        clearNumber();
+    } else {
+        clearAll();
+    }
+    clearBtn.innerHTML = "AC";
     updateScreen(currentNumber);
 });
 
