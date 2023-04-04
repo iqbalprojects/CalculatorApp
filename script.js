@@ -100,7 +100,7 @@ numbers.forEach((number) => {
 
 operators.forEach((operator) => {
     operator.addEventListener("click", (event) => {
-        if (prevNumber && currentNumber !== "0") {
+        if (prevNumber) {
             calculate();
             calculatorScreen.value = "0";
             updateScreen(currentNumber);
@@ -123,17 +123,14 @@ percentage.addEventListener("click", () => {
 });
 
 equalSign.addEventListener("click", () => {
-    if (currentNumber == 0) {
-        return;
-    } else {
-        calculate();
-        calculatorScreen.value = "0";
-        updateScreen(currentNumber);
-    }
+    calculate();
+    calculatorScreen.value = "0";
+    updateScreen(currentNumber);
+    currentNumber = "0";
 });
 
 clearBtn.addEventListener("click", () => {
-    if (calculatorScreen.value > 0) {
+    if (calculationOperator) {
         clearNumber();
     } else {
         clearAll();
