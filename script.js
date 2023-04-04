@@ -29,7 +29,7 @@ const inputNumber = (number) => {
 };
 
 const inputOperator = (operator) => {
-    if (calculationOperator === "") {
+    if (calculationOperator === "" && !prevNumber) {
         prevNumber = currentNumber;
     }
     calculationOperator = operator;
@@ -85,14 +85,11 @@ numbers.forEach((number) => {
     number.addEventListener("click", (event) => {
         if (prevNumber && currentNumber === "0") {
             calculatorScreen.value = "0";
-            inputNumber(event.target.value);
-            updateScreen(event.target.value);
-        } else {
-            inputNumber(event.target.value);
-            updateScreen(event.target.value);
         }
+        inputNumber(event.target.value);
+        updateScreen(event.target.value);
 
-        if (currentNumber >= 0) {
+        if (currentNumber > 0) {
             clearBtn.innerHTML = "C";
         }
     });
@@ -102,8 +99,10 @@ operators.forEach((operator) => {
     operator.addEventListener("click", (event) => {
         if (prevNumber) {
             calculate();
-            calculatorScreen.value = "0";
-            updateScreen(currentNumber);
+            if (currentNumber !== "0") {
+                calculatorScreen.value = "0";
+                updateScreen(currentNumber);
+            }
         } else if (currentNumber.includes(".") && currentNumber === "0.") {
             calculatorScreen.value = currentNumber;
             return;
@@ -126,11 +125,12 @@ equalSign.addEventListener("click", () => {
     calculate();
     calculatorScreen.value = "0";
     updateScreen(currentNumber);
+    prevNumber = currentNumber;
     currentNumber = "0";
 });
 
 clearBtn.addEventListener("click", () => {
-    if (calculationOperator) {
+    if (clearBtn.textContent === "C") {
         clearNumber();
     } else {
         clearAll();
