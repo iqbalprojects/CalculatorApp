@@ -77,6 +77,7 @@ const inputDecimal = (dot) => {
         return;
     } else {
         currentNumber += dot;
+        clearBtn.innerHTML = "C";
     }
     updateScreen(currentNumber);
 };
