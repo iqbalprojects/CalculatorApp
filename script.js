@@ -112,10 +112,15 @@ operators.forEach((operator) => {
 });
 
 percentage.addEventListener("click", () => {
-    if (prevNumber) {
+    if (prevNumber && currentNumber !== "0") {
         currentNumber = `${(currentNumber / 100) * prevNumber}`;
     } else {
-        currentNumber = `${currentNumber / 100}`;
+        if (prevNumber) {
+            currentNumber = `${prevNumber / 100}`;
+            prevNumber = currentNumber;
+        } else {
+            currentNumber = `${currentNumber / 100}`;
+        }
     }
     calculatorScreen.value = "0";
     updateScreen(currentNumber);
