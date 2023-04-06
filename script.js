@@ -38,6 +38,7 @@ const inputOperator = (operator) => {
 
 const calculate = () => {
     let result = "";
+    console.log(calculationOperator);
     switch (calculationOperator) {
         case "+":
             result = parseFloat(prevNumber) + parseFloat(currentNumber);
@@ -124,6 +125,7 @@ percentage.addEventListener("click", () => {
         }
     }
     calculatorScreen.value = "0";
+    calculationOperator = "";
     updateScreen(currentNumber);
 });
 
